@@ -1,0 +1,31 @@
+body{
+    width: 99%;
+    background-color:#D3D3D3;
+}
+.titulo{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-size: 27px;
+color:black;
+text-align: center;
+margin-top: 25px;
+}
+
+.funcionario{
+    float: left;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+.funcionario h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.funcionario label{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+.funcionario input{
+    height: 25px;
+    width: 260px;
+    background-color:lightsteelblue;
+    
+}
