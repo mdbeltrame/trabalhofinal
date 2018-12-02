@@ -8,53 +8,71 @@
     <title>Trabalho Final</title>
 </head>
 <body>
-    <hr>
-    <hr>
-    <div class="titulo">Cadastro de Funcionarios!</div>
-    <br>
-    <hr>
-    <hr>
     <div id="funcionario" class="funcionario" align=center>
+
+        <form id="formulario">
+            <input type="hidden" id="id">
+
         <h1>Funcionarios</h1>
         <br>
-
         <div>
-                    <label>Nome </label>
-                    <br>
-                    <input type="text" placeholder="Digite o Nome" id="nomeFuncionario" required="required">
-                </div>
-                <br>	
-                <div>
-                        <label>CPF </label>
-                        <br>
-                        <input type="number" placeholder="Digite o CPF" id="cpfFuncionario" required="required">
-                    </div>
-                    <br>
-                    <div>
-                            <label>RG</label>
-                            <br>
-                            <input type="number" placeholder="Digite o Número do RG" id="rgFuncionario" required="required">
-                        </div>
-                        <br>
-                    <div>
-                            <label>Idade</label>
-                            <br>
-                            <input type="number" placeholder="Digite a Idade" id="idadeFuncionario" required="required">
-                        </div>
-                        <br>
-                        <div>
-                                <label>Endereço</label>
-                                <br>
-                                <input type="text" placeholder="Digite o Endereço" id="enderecoFuncionario" required="required">
-                            </div>
-                        <br>
-                        
-                    <div>
-                            <label>Número do Título de Eleitor</label>
-                            <br>
-                            <input type="number" placeholder="Digite o Número do Tíitulo de Eleitor" id="tituloFuncionario" required="required">
-                        </div>
-                        <br>
+            <label>Nome </label>
+            <input type="text" placeholder="Digite o Nome" id="nomeFuncionario" required="required">
+        </div>
+        <br>	
+        <div>
+            <label>CPF </label>
+            <input type="number" placeholder="Digite o CPF" id="cpfFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <label>RG</label>
+            <input type="number" placeholder="Digite o Número do RG" id="rgFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <label>Idade</label>
+            <input type="number" placeholder="Digite a Idade" id="idadeFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <label>Telefone</label>
+            <input type="number" placeholder="Digite o seu Número" id="telefoneFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <label>Endereço</label>
+            <input type="text" placeholder="Digite o Endereço" id="enderecoFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <label>Número do Título de Eleitor</label>
+            <input type="number" placeholder="Digite o Número do Tíitulo de Eleitor" id="tituloFuncionario" required="required">
+        </div>
+        <br>
+        <div>
+            <button type="submit">Salvar</button>
+        </div>
+
+    </form>
+        <br>
+        <div>
+            <table border="1">
+                <thead>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <td>RG</td>
+                    <td>Idade</td>
+                    <th>Telefone</th>
+                    <td>Endereço</td>
+                    <td>Número do Título de Eleitor</td>
+                    <th>Opcões</th>
+                </thead>
+                <tbody id="corpo-tabela-funcionarios">
+                    
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
