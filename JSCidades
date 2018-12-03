@@ -1,1 +1,179 @@
+// executa assim que a página terminar de carregar
+(function() {
+    
+    var listaCidades = [];
+    
+    function salvarCidades(){
+        var cidades = {};
+    
+        cidades.nome =$("#nomeCidades").val();
+        cidades.estado = $("#estadoCidades").val();
+        cidades.CEP = $("#CEPCidades").val();
+       
 
+        let id = $("#id").val();
+    
+        // não tenho código = criar novo
+        if(id == undefined || id == ''){
+            cidades.id = new Date().getTime();
+            listaCidades.push(cidades);
+        } else { // se tenho id, estou editando
+            let idNumber = parseInt(id);
+            let cidadesExixtentes = findCidadesById(idNumber);
+            
+            if(cidadesExixtentes){
+                cidadesExixtentes.nome = cidades.nomeCidades;
+                cidadesExixtentes.estado = cidades.estadoCidades;
+                cidadesExixtentes.CEP = cidades.CEPCidades;
+               
+            }
+        }
+    
+        gravaNoLocalStorageCidades();
+        renderizaCidades();
+        zerarInputsCidades();
+    
+        return false;
+    };
+    
+    function renderizaCidades(){
+        // busco o tbody com o id
+        const tbody = $("#corpo-tabela-cidades");
+    
+        // zerando o conteúdo da tabela
+        tbody.html('');
+    
+        for(let i=0; i<listaCidades.length; i++){
+            // Busco a pessoa da lista
+            const cidades = listaCidades[i];
+    
+            // cria um elemento html do tipo tr
+            // table row - linha da tabela
+            let tr = $('<tr>');
+    
+            // cria um elemento html do tipo td
+            // table data - dado da tabela
+            let tdnomeCidades = $('<td>').text(cidades.nome);
+            let tdestadoCidades = $('<td>').text(cidades.estado);
+            let tdCEPCidades = $('<td>').text(cidades.CEP);
+            let tdOpcoes = $('<td>');
+    
+            let btnEditarCidades = $('<button>').text('Editar');
+            let btnExcluirCidades = $('<button>').text('Excluir');
+            
+            // associa o click a uma function
+            btnEditarCidades.click(function(){ 
+                editarCidades(cidades.id); 
+            });
+    
+            // associa o click a uma function
+            btnExcluirCidades.click(function(){ 
+                excluirCidades(cidades.id); 
+            });
+            
+            tdOpcoes.append(btnEditarCidades).append(btnExcluirCidades);
+    
+            // adiciono os td dentro do tr
+            // na order a ser exibida
+            tr.append(tdnomeCidades)
+                .append(tdestadoCidades)
+                .append(tdCEPCidades)
+                .append(tdOpcoes);
+    
+            // adiciona o tr no tbody
+            tbody.append(tr);
+        }
+    }
+    
+    function editarCidades(id){
+       let cidades = findCidadesById(id);
+    
+        if(cidades){
+            $("#nomeCidades").val(cidades.nomeCidades);
+            $("#estadoCidades").val(cidades.estadoCidades);
+            $("#CEPCidades").val(cidades.CEPCidades);
+            $("#id").val(cidades.id);
+
+        }else{
+            alert('Não foi possível encontrar a cidade');
+        }
+    }
+    
+    
+    function excluirCidades(id){
+        listaCidades = listaCidades
+            .filter(function(value){
+                return value.id != id;
+            });
+    
+        gravaNoLocalStorageCidades();
+        renderizaCidades();
+    }
+    
+    function findCidadesById(id){
+        let cidade = listaCidades
+            .filter(function(value){
+                return value.id == id;
+            });
+        
+        if(cidades.length == 0){
+            return undefined;
+        }else{
+            return cidades[0];
+        }
+    }
+    
+    function zerarInputsCidades(){
+        $('#formularioCidade input').val('');
+    }
+    
+    function gravaNoLocalStorageCidades(){
+        // convertendo a lista em string no formato JSON
+        const listaEmJSON = JSON.stringify(listaCidades);
+    
+        // gravando no localStorage
+        localStorage.setItem("listaCidades", listaEmJSON);
+    }
+    
+    function buscaDoLocalStorageCidades(){
+        // busca do local storage
+        const listaStorage = localStorage.getItem("listaCidades");
+    
+        // converte para lista e atribui
+        listaCidades = JSON.parse(listaStorage) || [];
+    }
+    
+        // o que se deseja executar
+        buscaDoLocalStorageCidades();
+        renderizaCidades();
+    
+        $("#formularioCidade").on("submit", function(evt){
+                salvarCidades();
+                // corta a linha de execucao
+                evt.stopPropagation(); 
+    
+                // previne o comportamento padrão
+                evt.preventDefault();
+            });
+        
+        // busco todos os inputs
+        $('input, select').each(function(index, element){
+         
+            element.oninvalid = function(){
+                const msg = $(this).data('custom-message');
+    
+                if(msg){
+                    // remove mensagens de erro antigas
+                    this.setCustomValidity("");
+    
+                    // executa novamente a validação
+                    if (!this.validity.valid) {
+                        // se inválido, coloca mensagem de erro customizada
+                        this.setCustomValidity(msg);
+                    }   
+                }
+            }
+        });
+        
+    
+})();
