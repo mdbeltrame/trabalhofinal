@@ -1,0 +1,181 @@
+
+
+    
+ (function() {
+
+    var listaFuncionarios = [];
+    
+    function salvarFuncionario(){
+        var funcionarios = {};
+    
+        funcionarios.nome =$("#nomeFuncionario").val();
+        funcionarios.cpf = $("#cpfFuncionario").val();
+        funcionarios.rg = $("#rgFuncionario").val();
+        funcionarios.idade = $("#idadeFuncionario").val();
+        funcionarios.telefone = $("#telefoneFuncionario").val();
+        funcionarios.endereco = $("#enderecoFuncionario").val();
+        
+
+        let id = $("#id").val();
+    
+        // não tenho código = criar novo
+        if(id == undefined || id == ''){
+            funcionarios.id = new Date().getTime();
+            listaFuncionarios.push(funcionarios);
+        } else { // se tenho id, estou editando
+            let idNumber = parseInt(id);
+            let funcionariosExistentes = findFuncionariosById(idNumber);
+            
+            if(funcionariosExistentes){
+                funcionariosExistentes.nome = funcionarios.nome;
+                funcionariosExistentes.cpf = funcionarios.cpf;
+                funcionariosExistentes.rg = funcionarios.rg;
+                funcionariosExistentes.idades = funcionarios.idade;
+                funcionariosExistentes.telefone = funcionarios.telefone;
+                funcionariosExistentes.endereco = funcionarios.endereco;
+                
+            }
+        }
+    
+        gravaNoLocalStorage();
+        renderizaFuncionario();
+        zerarInputsFuncionario();
+    
+        return false;
+    };
+    function findFuncionariosById(id){
+        let funcionarios = listaFuncionarios
+            .filter(function(value){
+                return value.id == id;
+            });
+        
+        if(funcionarios.length == 0){
+            return undefined;
+        }else{
+            return funcionarios[0];
+        }
+    };
+
+    
+    function zerarInputsFuncionario(){
+        $('#formularios input').val('');
+    };
+
+    
+    function renderizaFuncionario(){
+        
+        const tbody = $("#corpo-tabela-funcionarios");
+        tbody.html('');
+    
+        for(let i=0; i<listaFuncionarios.length; i++){
+           
+            const funcionarios = listaFuncionarios[i];
+
+            let tr = $('<tr>');
+
+            let tdnomeFuncionarios = $('<td>').text(funcionarios.nome);
+            let tdcpfFuncionarios = $('<td>').text(funcionarios.cpf);
+            let tdrgFuncionarios = $('<td>').text(funcionarios.rg);
+            let tdidadeFuncionarios = $('<td>').text(funcionarios.idade);
+            let tdtelefoneFuncionarios = $('<td>').text(funcionarios.telefone);
+            let tdenderecoFuncionarios = $('<td>').text(funcionarios.endereco);
+           
+            let tdOpcoes = $('<td>');
+    
+            let btnEditarFuncionario = $('<button>').text('Editar');
+            let btnExcluirFuncionario = $('<button>').text('Excluir');
+            
+            // associa o click a uma function
+            btnEditarFuncionario.click(function(){ 
+                EditarFuncionario(funcionarios.id); 
+            });
+    
+            // associa o click a uma function
+            btnExcluirFuncionario.click(function(){ 
+                ExcluirFuncionario(funcionarios.id); 
+            });
+            
+            tdOpcoes.append(btnEditarFuncionario).append(btnExcluirFuncionario);
+    
+            
+            tr.append(tdnomeFuncionarios)
+            .append(tdcpfFuncionarios)
+            .append(tdrgFuncionarios)
+            .append(tdidadeFuncionarios)
+            .append(tdtelefoneFuncionarios)
+            .append(tdenderecoFuncionarios)
+            
+            .append(tdOpcoes);
+    
+            
+            tbody.append(tr);
+        }
+    };
+    
+    function EditarFuncionario(id){
+       let funcionarios = findFuncionariosById(id);
+    
+        if(funcionarios){
+            $("#nomeFuncionario").val(funcionarios.nome);
+            $("#cpfFuncionario").val(funcionarios.cpf);
+            $("#rgFuncionario").val(funcionarios.rg);
+            $("#idadeFuncionario").val(funcionarios.idade);
+            $("#telefoneFuncionario").val(funcionarios.telefone);
+            $("#enderecoFuncionario").val(funcionarios.endereco);
+           
+            $("#id").val(funcionarios.id);
+
+        }else{
+            alert('Não foi possível encontrar o funcionário');
+        };
+    };
+    
+    
+    function ExcluirFuncionario(id){
+        listaFuncionarios = listaFuncionarios
+            .filter(function(value){
+                return value.id != id;
+            });
+    
+        gravaNoLocalStorage();
+        renderizaFuncionario();
+    };
+    
+   
+    
+    function gravaNoLocalStorage(){
+        // convertendo a lista em string no formato JSON
+        const listaEmJSON = JSON.stringify(listaFuncionarios);
+    
+        // gravando no localStorage
+        localStorage.setItem("listaFuncionario", listaEmJSON);
+    };
+    
+    function buscaDoLocalStorage(){
+        // busca do local storage
+        const listaStorage = localStorage.getItem("listaFuncionario");
+    
+        // converte para lista e atribui
+        listaFuncionarios = JSON.parse(listaStorage) || [];
+    };
+    
+        // o que se deseja executar
+        buscaDoLocalStorage();
+        renderizaFuncionario();
+    
+        $("#formularios").on("submit", function(evt){
+                salvarFuncionario();
+                // corta a linha de execucao
+                evt.stopPropagation(); 
+    
+                // previne o comportamento padrão
+                evt.preventDefault();
+            });
+        
+        
+    
+        
+        })();
+
+
+  
