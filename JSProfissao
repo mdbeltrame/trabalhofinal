@@ -1,0 +1,146 @@
+//Profissao
+var listaProfissao = [];
+    
+function salvarProfissao(){
+ 
+    var profissao = {};
+
+    profissao.nome = $("#nomeProfissao").val();
+    profissao.cargaHoraria = $("#cargaHorariaProfissao").val();
+    profissao.salario = $("#salarioProfissao").val();
+
+    let id = $("#id").val();
+
+    // não tenho código = criar novo
+    if(id == undefined || id == ''){
+        profissao.id = new Date().getTime();
+        listaProfissao.push(profissao);
+        } else { // se tenho id, estou editando
+         let idNumberS = parseInt(id);
+            let profissaoExixtentes = findProfissaoById(idNumberS);
+        
+        if(profissaoExixtentes){
+            profissaoExixtentes.nome = profissao.nome;
+            profissaoExixtentes.cargaHoraria = profissao.cargaHoraria;
+            profissaoExixtentes.salario =profissao.salario;
+           
+        }
+    }
+
+    gravaNoLocalStorageProfissao();
+    renderizaProfissao();
+    zerarInputsProfissao();
+
+    return false;
+};
+
+
+
+function renderizaProfissao(){
+        
+    const tbody = $("#corpo-tabela-profissao");
+    tbody.html('');
+
+    for(let i=0; i<listaProfissao.length; i++){
+       
+        const profissao = listaProfissao[i];
+
+        let tr = $('<tr>');
+
+        let tdNome = $('<td>').text(profissao.nome);
+        let tdCargaHoraria = $('<td>').text(profissao.cargaHoraria);
+        let tdSalario = $('<td>').text(profissao.salario);
+        let tdOpcoes = $('<td>');
+
+        let btnEditarProfissao = $('<button>').text('Editar');
+        let btnExcluirProfissao = $('<button>').text('Excluir');
+        
+        // associa o click a uma function
+        btnEditarProfissao.click(function(){ 
+            editarProfissao(profissao.id); 
+        });
+
+        // associa o click a uma function
+        btnExcluirProfissao.click(function(){ 
+            excluirProfissao(profissao.id); 
+        });
+        
+        tdOpcoes.append(btnEditarProfissao).append(btnExcluirProfissao);
+
+        
+        tr.append(tdNome).append(tdCargaHoraria).append(tdSalario).append(tdOpcoes);
+
+        
+        tbody.append(tr);
+    }
+};
+
+function editarProfissao(id){
+    let profissao = findProfissaoById(id);
+ 
+     if(profissao){
+         $("#nomeProfissao").val(profissao.nome);
+         $("#cargaHorariaProfissao").val(profissao.cargaHoraria);
+         $("#salarioProfissao").val(profissao.salario);
+         $("#id").val(profissao.id);
+
+     }else{
+         alert('Não foi possível encontrar a Profissão');
+     }
+ };
+ 
+ 
+ function excluirProfissao(id){
+     listaProfissao= listaProfissao.filter(function(value){
+             return value.id != id;
+         });
+ 
+     gravaNoLocalStorageProfissao();
+     renderizaProfissao();
+ };
+
+ function findProfissaoById(id){
+    let profissao = listaProfissao.filter(function(value){
+            return value.id == id;
+        });
+    
+    if(profissao.length == 0){
+        return undefined;
+    }else{
+        return profissao[0];
+    }
+};
+
+
+function zerarInputsProfissao(){
+    $('#formularioProfissao input').val('');
+};
+ 
+ function gravaNoLocalStorageProfissao(){
+    // convertendo a lista em string no formato JSON
+    const listaEmJSON = JSON.stringify(listaProfissao);
+
+    // gravando no localStorage
+    localStorage.setItem("listaProfissao", listaEmJSON);
+};
+
+function buscaDoLocalStorageProfissao(){
+    // busca do local storage
+    const listaStorage = localStorage.getItem("listaProfissao");
+
+    // converte para lista e atribui
+    listaProfissao = JSON.parse(listaStorage) || [];
+}
+
+buscaDoLocalStorageProfissao();
+renderizaProfissao();
+
+$("#formularioProfissao").on("submit", function(evt){
+        salvarProfissao();
+        // corta a linha de execucao
+        evt.stopPropagation(); 
+
+        // previne o comportamento padrão
+        evt.preventDefault();
+    });
+
