@@ -46,11 +46,8 @@
             <input type="text" placeholder="Digite o Endereço" id="enderecoFuncionario" required="required">
         </div>
         <br>
-        <div>
-            <label>Número do Título de Eleitor</label>
-            <input type="number" placeholder="Digite o Número do Tíitulo de Eleitor" id="tituloFuncionario" required="required">
-        </div>
-        <br>
+        
+        
         <div>
             <button type="submit">Salvar</button>
         </div>
@@ -67,7 +64,6 @@
                     <td>Idade</td>
                     <td>Telefone</td>
                     <td>Endereço</td>
-                    <td>Número do Título de Eleitor</td>
                     <td>Opcões</td>
                 </thead>
                 <tbody id="corpo-tabela-funcionarios">
@@ -126,53 +122,53 @@
     </div>
 </div>
 <div id="cidades" class="cidade" align=center>
-
         <form id="formularioCidade">
-            <input type="hidden" id="id">
-
+           <input type="hidden" id="id">
         <h1>Cidades</h1>
-        <br>
-        <div>
-            <label>Nome </label>
-            <input type="text" placeholder="Digite o Nome" id="nomeCidades" required="required">
-        </div>
-        <br>
-        <div>
-            <label>Estado </label>
-            <input type="text" placeholder="Digite o estado" id="estadoCidades" required="required">
-        </div>
-        <br>
-        <div>
-            <label>CEP</label>
-            <input type="text" placeholder="Digite o CEP" id="CEPCidades" required="required">
-        </div>	
-        <br>
-        <div>
-            
-            <button type="submit">Salvar</button>
-        </div>
-    </form>
-    <br>
-    <br>
-    <div>
-        <table border="1">
-            <thead>
-                <td>Nome</td>
-                <td>Estado</td>
-                <td>CEP</td>
-                <td>Opcões</td>
-            </thead>
-            <tbody id="corpo-tabela-cidades">
-                
-            </tbody>
-        </table>
-    </div>
+       <br>
+       <div>
+           <label>Nome </label>
+           <input type="text" placeholder="Digite o Nome" id="nomeCidades" required="required">
+       </div>
+       <br>
+       <div>
+           <label>Estado </label>
+           <input type="text" placeholder="Digite o estado" id="estadoCidades" required="required">
+       </div>
+       <br>
+       <div>
+           <label>CEP</label>
+           <input type="text" placeholder="Digite o CEP" id="CEPCidades" required="required">
+       </div>	
+       <br>
+       <div>
+           
+           <button type="submit">Salvar</button>
+       </div>
+   </form>
+   <br>
+   <br>
+   <div>
+       <table border="1">
+           <thead>
+               <td>Nome</td>
+               <td>Estado</td>
+               <td>CEP</td>
+               <td>Opcões</td>
+           </thead>
+           <tbody id="corpo-tabela-cidades">
+               
+           </tbody>
+       </table>
+   </div>
 </div>
 
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="scriptProfissao.js"></script>
     <script type="text/javascript" src="scriptcidade.js"></script>
+
 </body>
 </html>
