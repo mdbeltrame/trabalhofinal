@@ -9,6 +9,9 @@
 </head>
 <body>
     
+<button type="submit">Funcionario</button>
+
+
     <div id="funcionarios" class="funcionario" align=center>
 
         <form id="formularios">
@@ -46,8 +49,16 @@
             <input type="text" placeholder="Digite o Endereço" id="enderecoFuncionario" required="required">
         </div>
         <br>
-        
-        
+        <div>
+            <label>Profissão</label>
+            <select id="profissao-funcionario"></select>
+        </div>
+        <br>
+        <div>
+            <label>Cidade</label>
+            <select id="cidade-funcionario"></select>
+        </div>
+        <br>
         <div>
             <button type="submit">Salvar</button>
         </div>
@@ -64,6 +75,8 @@
                     <td>Idade</td>
                     <td>Telefone</td>
                     <td>Endereço</td>
+                    <td>Profissão</td>
+                    <td>Cidade</td>
                     <td>Opcões</td>
                 </thead>
                 <tbody id="corpo-tabela-funcionarios">
@@ -121,9 +134,14 @@
         </table>
     </div>
 </div>
+
+
+
+
+
 <div id="cidades" class="cidade" align=center>
         <form id="formularioCidade">
-           <input type="hidden" id="id">
+           <input type="hidden" id="idCidade">
         <h1>Cidades</h1>
        <br>
        <div>
@@ -165,10 +183,11 @@
 
 
 
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="scriptProfissao.js"></script>
-    <script type="text/javascript" src="scriptcidade.js"></script>
+    
+    
 
 </body>
 </html>
