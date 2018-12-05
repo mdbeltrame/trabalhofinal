@@ -1,31 +1,61 @@
 body{
-    width: 99%;
-    background-color:#D3D3D3;
+    width: 100%;
+    
+    background-attachment: fixed;
+    background-size: 100%;
+    background-color: #808080;
+    
+
 }
 .titulo{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-font-size: 27px;
-color:black;
-text-align: center;
-margin-top: 25px;
-}
-
-.funcionario{
-    float: left;
-    margin-left: 25px;
-    margin-top: 25px;
-}
-.funcionario h1{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-.funcionario label{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 20px;
-}
-.funcionario input{
-    height: 25px;
-    width: 260px;
-    background-color:lightsteelblue;
     
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    
+}
+.btnopcoes table{
+    background-color: white;
+}
+.btnprofissaoo table{
+    background-color: white;
+}
+.btnCidade table{
+    background-color: white;
+}
+label{
+    font-weight: bold;
+    font-style: italic;
+}
+
+.cidade-tabela{
+    align:center;
+}
+
+.w3-container input{
+    float: right;
+    margin-right: 520px;
+    
+}
+.w3-container label{
+ margin-right: -480px;
+}
+.w3-container select{
+    float: right;
+    width: 205px;
+    margin-right: 520px;
+    
+}
+
+
+.botaofuncionario{
+    margin-right: -65px;
+    background-color: #ADFF2F;
+}
+.btnprofissao{
+    margin-right: -65px;
+    background-color: #ADFF2F;
+}
+.btncidade{
+    margin-right: -65px;
+    background-color: #ADFF2F;
 }
