@@ -1,36 +1,19 @@
-/*
-  $('#funcionarios-btn').on('click', function(event){
-    if($('#funcionarios').css('display') == "none"){
-       $('#funcionarios').css('display', 'block');
-    }else{
-        $('#funcionarios').css('display', 'none');
-    }
-});
-$('#profissao-btn').on('click', function(event){
-    if($('#profissao').css('display') == "none"){
-       $('#profissao').css('display', 'block');
-    }else{
-        $('#profissao').css('display', 'none');
-    }
-});
-<div class="sidenav">
-                <a id="funcionarios-btn">Funcionario</a>
-                <a id="profissao-btn">Profissão</a>
-                <a id="cidades-btn">Cidades</a>
-              </div>
-*/
-
+// faz a troca do menu
 function abrirAba(menus) {
-    var i;
-    var x = document.getElementsByClassName("aba");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";  
-    }
-    document.getElementById(menus).style.display = "block";  
+    
+    $(".aba").hide();
+   
+   $('#'+ menus).show();  
 };
 
+
+
+
+
+
+
+
     
- 
 
     var listaFuncionarios = [];
     
@@ -78,6 +61,7 @@ function abrirAba(menus) {
     
         return false;
     };
+    //procura pelo id
     function findFuncionariosById(id){
         let funcionarios = listaFuncionarios
             .filter(function(value){
@@ -244,6 +228,7 @@ function abrirAba(menus) {
         }
     };
 
+    // Carrega os dados da lista de cidades e mostra no select da página funcionários
     function renderizaSelectCidade(){
         const corpoSelectcidade = $('#cidade-funcionario');
         corpoSelectcidade.html('');
@@ -252,26 +237,10 @@ function abrirAba(menus) {
             const Cidades = listaCidades[i];
             
             let linhacidade = $('<option>');
-            linhacidade.html(Cidades.nome +" "+ Cidades.estado);
+            linhacidade.html(Cidades.nome +" - "+ Cidades.estado);
             corpoSelectcidade.append(linhacidade);
 
             
             
         }
     };
-
-
-    
-
-
-
-
-
-
-    
-        
-        
-        
-    
-
-
